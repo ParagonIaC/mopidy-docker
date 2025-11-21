@@ -12,12 +12,9 @@
   "stabilityDays": 3,
   "prConcurrentLimit": 5,
   "branchConcurrentLimit": 5,
-  "pip": {
-    "enabled": true
-  },
-  "dockerfile": {
-    "enabled": true
-  },
+  "enabledManagers": [
+    "dockerfile"
+  ],
   "docker": {
     "enabled": true,
     "automerge": false
@@ -25,38 +22,22 @@
   "packageRules": [
     {
       "description": "Auto-merge minor/patch updates for Debian base images",
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "matchPackagePatterns": [
-        "^debian"
-      ],
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackagePatterns": ["^debian"],
       "automerge": true,
       "automergeType": "pr"
     },
     {
       "description": "Group Mopidy extension updates (case-insensitive)",
-      "matchDatasources": [
-        "pypi"
-      ],
-      "matchPackagePatterns": [
-        "(?i)^mopidy-"
-      ],
+      "matchDatasources": ["pypi"],
+      "matchPackagePatterns": ["(?i)^mopidy-"],
       "groupName": "Mopidy extensions"
     },
     {
       "description": "Auto-merge patch updates for pip and docker where prudent",
-      "matchDatasources": [
-        "pypi",
-        "docker"
-      ],
-      "matchUpdateTypes": [
-        "patch"
-      ],
+      "matchDatasources": ["pypi", "docker"],
+      "matchUpdateTypes": ["patch"],
       "automerge": true,
       "automergeType": "pr"
     }
