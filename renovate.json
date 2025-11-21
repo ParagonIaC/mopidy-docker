@@ -5,9 +5,13 @@
     ":dependencyDashboard",
     ":semanticCommits"
   ],
+  "timezone": "UTC",
   "schedule": [
     "before 3am on Monday"
   ],
+  "stabilityDays": 3,
+  "prConcurrentLimit": 5,
+  "branchConcurrentLimit": 5,
   "pip": {
     "enabled": true
   },
@@ -20,7 +24,7 @@
   },
   "packageRules": [
     {
-      "description": "Auto-merge minor updates for Debian base images",
+      "description": "Auto-merge minor/patch updates for Debian base images",
       "matchDatasources": [
         "docker"
       ],
@@ -32,25 +36,29 @@
         "^debian"
       ],
       "automerge": true,
-      "autoMergeType": "pr"
+      "automergeType": "pr"
     },
     {
-      "description": "Group Mopidy extension updates",
+      "description": "Group Mopidy extension updates (case-insensitive)",
       "matchDatasources": [
         "pypi"
       ],
       "matchPackagePatterns": [
-        "^Mopidy-"
+        "(?i)^mopidy-"
       ],
       "groupName": "Mopidy extensions"
     },
     {
-      "description": "Auto-merge patch updates",
+      "description": "Auto-merge patch updates for pip and docker where prudent",
+      "matchDatasources": [
+        "pypi",
+        "docker"
+      ],
       "matchUpdateTypes": [
         "patch"
       ],
       "automerge": true,
-      "autoMergeType": "pr"
+      "automergeType": "pr"
     }
   ]
 }
