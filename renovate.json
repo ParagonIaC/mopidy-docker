@@ -1,6 +1,56 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:base",
+    ":dependencyDashboard",
+    ":semanticCommits"
+  ],
+  "schedule": [
+    "before 3am on Monday"
+  ],
+  "pip": {
+    "enabled": true
+  },
+  "dockerfile": {
+    "enabled": true
+  },
+  "docker": {
+    "enabled": true,
+    "automerge": false
+  },
+  "packageRules": [
+    {
+      "description": "Auto-merge minor updates for Debian base images",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "matchPackagePatterns": [
+        "^debian"
+      ],
+      "automerge": true,
+      "autoMergeType": "pr"
+    },
+    {
+      "description": "Group Mopidy extension updates",
+      "matchDatasources": [
+        "pypi"
+      ],
+      "matchPackagePatterns": [
+        "^Mopidy-"
+      ],
+      "groupName": "Mopidy extensions"
+    },
+    {
+      "description": "Auto-merge patch updates",
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "automerge": true,
+      "autoMergeType": "pr"
+    }
   ]
 }
