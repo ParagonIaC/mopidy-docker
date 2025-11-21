@@ -40,7 +40,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm ci
+          npm install
           npm install --save-dev conventional-changelog-conventionalcommits
 
       - name: Semantic Release
