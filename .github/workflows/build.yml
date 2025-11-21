@@ -37,11 +37,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Install dependencies
+      
+      - name: Install semantic-release and plugins
         run: |
-          npm install
-          npm install --save-dev conventional-changelog-conventionalcommits
+          npm install -g semantic-release \
+            @semantic-release/github \
+            @semantic-release/commit-analyzer \
+            @semantic-release/release-notes-generator \
+            conventional-changelog-conventionalcommits
 
       - name: Semantic Release
         id: semantic
