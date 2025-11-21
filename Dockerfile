@@ -32,12 +32,15 @@ RUN apt-get update \
         mopidy \
         mopidy-mpd \
         mopidy-local \
+        mopidy-scrobbler \
     \
     # Upgrade pip and install Python packages
     && python3 -m pip install --upgrade pip --break-system-packages \
     && python3 -m pip install --no-cache-dir \
         Mopidy-Iris==3.70.0 \
         Mopidy-YouTube==3.7 \
+        Mopidy-Autoplay==0.2.3 \
+        Mopidy-WebM3U==0.1.3 \
         yt-dlp==2025.11.12 \
         pyopenssl==25.3.0 \
         --break-system-packages \
